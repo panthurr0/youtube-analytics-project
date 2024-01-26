@@ -44,6 +44,10 @@ class Channel:
     def __eq__(self, other):
         return self.subscriber == other.subscriber
 
+    @property
+    def channel_id(self):
+        return self.__channel_id
+
     @classmethod
     def get_service(cls):
         """
@@ -74,6 +78,5 @@ class Channel:
         json.dump(result, file)
         file.close()
 
-    @property
-    def channel_id(self):
-        return self.__channel_id
+
+
