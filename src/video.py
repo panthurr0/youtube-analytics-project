@@ -17,15 +17,22 @@ class Video():
         self.share_attributes()
 
     def share_attributes(self):
-        response = self.video_response()
-        self.video_title: str = response['items'][0]['snippet']['title']
-        self.view_count: int = response['items'][0]['statistics']['viewCount']
-        self.like_count: int = response['items'][0]['statistics']['likeCount']
-        self.comment_count: int = response['items'][0]['statistics']['commentCount']
-        self.url = f"https://www.youtube.com/channel/{self.video_id}"
+        try:
+            response = self.video_response()
+            self.title: str = response['items'][0]['snippet']['title']
+            self.view_count: int = response['items'][0]['statistics']['viewCount']
+            self.like_count: int = response['items'][0]['statistics']['likeCount']
+            self.comment_count: int = response['items'][0]['statistics']['commentCount']
+            self.url = f"https://www.youtube.com/channel/{self.video_id}"
+        except IndexError:
+            self.title = None
+            self.view_count = None
+            self.like_count = None
+            self.comment_count = None
+            self.url = None
 
     def __str__(self):
-        return f'{self.video_title}'
+        return f'{self.title}'
 
     @property
     def video_id(self):
